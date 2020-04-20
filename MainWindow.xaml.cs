@@ -23,6 +23,11 @@ namespace Total_Print
             }
         }
 
+        public void OnDone()
+        {
+            progressBar.Visibility = Visibility.Hidden;
+        }
+
         private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             string path = PickFolderDialog(textBoxDirectory.Text, "Select folder for printing");
@@ -57,8 +62,7 @@ namespace Total_Print
             if (printer.Ready())
                 printer.PrintAsync();
 
-            //printer.OnDone()
-            //progressBar.Visibility = Visibility.Hidden;
+            printer.Done(OnDone);
         }
         private void CheckBox_Change(object sender, RoutedEventArgs e)
         {

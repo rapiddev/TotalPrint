@@ -2,6 +2,7 @@
 using System.Drawing.Printing;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace Total_Print
 {
@@ -16,7 +17,10 @@ namespace Total_Print
 
     class PrintBuilder
     {
-        DocFile[] docsList;
+        private DocFile[] _docsList;
+        private int _taskCount;
+        private int _taskCur;
+        private Action _funcOnDone;
 
         private PrinterSettings _printer;
         private PageSettings _page;
@@ -37,24 +41,30 @@ namespace Total_Print
         }
         public PrintBuilder SetList(DocFile[] files)
         {
-            this.docsList = files;
+            this._docsList = files;
+            this._taskCount = files.Length;
             return this;
         }
-        public object OnDone(object t)
+        public void Done(Action action)
         {
-            return t;
+            _funcOnDone = action;
         }
         public bool Ready()
         {
-            if (this.docsList != null && this._printer != null && this._page != null)
+            if (this._docsList != null && this._printer != null && this._page != null)
                 return true;
+
+            if (_funcOnDone != null)
+                App.Current.Dispatcher.Invoke(_funcOnDone);
             return false;
         }
         public async void PrintAsync()
         {
-            if(this.Ready())
+            this._taskCur = 0;
+
+            if (this.Ready())
             {
-                foreach (DocFile file in docsList)
+                foreach (DocFile file in _docsList)
                 {
                     if (File.Exists(file.path) && file.isSelected)
                         await Task.Run(() => PrintFile(file.path, file.name));
@@ -64,6 +74,7 @@ namespace Total_Print
         private void PrintFile(string path, string name = "Unknown PDF")
         {
             Thread.Sleep(100);
+            _taskCur++;
 
             foreach (PaperSize paperSize in this._printer.PaperSizes)
             {
@@ -83,6 +94,12 @@ namespace Total_Print
                     printDocument.PrintController = new StandardPrintController();
                     printDocument.Print();
                 }
+            }
+
+            if(_taskCur == _taskCount)
+            {
+                if(_funcOnDone != null)
+                    App.Current.Dispatcher.Invoke(_funcOnDone);
             }
         }
     }
