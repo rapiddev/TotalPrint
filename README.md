@@ -10,7 +10,7 @@ Print all your PDF files with one click
 - [x] Modern interface
 
 ## Interface
-Simple intuitive interface modeled created using MaterialDesignInXamlToolkit
+Simple intuitive interface created using MaterialDesignInXamlToolkit
 <br/><br/>
 ![Main](https://github.com/rapiddev/TotalPrint/blob/master/Assets/screen1.png?raw=true)
 <br/><br/>
