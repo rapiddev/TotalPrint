@@ -95,9 +95,10 @@
                                 </Grid.ColumnDefinitions>
                                 <CheckBox
                                     VerticalAlignment="Center"
+                                    Checked="CheckBox_Change"
                                     IsChecked="{Binding isSelected}"
-                                    MouseDown="CheckBox_MouseDown"
-                                    Tag="" />
+                                    Tag="{Binding id}"
+                                    Unchecked="CheckBox_Change" />
                                 <StackPanel Grid.Column="1" Margin="8,0,0,0">
                                     <TextBlock FontWeight="Bold" Text="{Binding name}" />
                                     <TextBlock Text="{Binding path}" />

@@ -39,11 +39,10 @@ namespace Total_Print
             docsList = new List<DocFile> { };
             // Process the list of files found in the directory.
             string[] fileEntries = Directory.GetFiles(targetDirectory);
-            int i = 0;
-            foreach (string fileName in fileEntries)
+            for (int i = 0; i < fileEntries.Length; i++)
             {
-                if(System.IO.Path.GetExtension(fileName) == ".pdf")
-                    docsList.Add(new DocFile() { id = i++, name = System.IO.Path.GetFileName(fileName), type = System.IO.Path.GetExtension(fileName), path = fileName, isSelected = true });
+                if (System.IO.Path.GetExtension(fileEntries[i]) == ".pdf")
+                    docsList.Add(new DocFile() { id = i, name = System.IO.Path.GetFileName(fileEntries[i]), type = System.IO.Path.GetExtension(fileEntries[i]), path = fileEntries[i], isSelected = true });
             }
         }
 
@@ -60,6 +59,18 @@ namespace Total_Print
 
             //printer.OnDone()
             //progressBar.Visibility = Visibility.Hidden;
+        }
+        private void CheckBox_Change(object sender, RoutedEventArgs e)
+        {
+            CheckBox check = sender as CheckBox;
+            int id = Convert.ToInt32(check.Tag.ToString());
+            
+            docsList[id] = new DocFile() {
+                name = docsList[id].name,
+                path = docsList[id].path,
+                type = docsList[id].type,
+                isSelected = (bool)check.IsChecked
+            };
         }
         private string PickFolderDialog(string _def, string _name = "Select directory")
         {
@@ -82,13 +93,6 @@ namespace Total_Print
             if (_dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 path = _dialog.FileName;
             return path;
-        }
-        private void CheckBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            CheckBox check = sender as CheckBox;
-
-            int id = Convert.ToInt32(check.Tag.ToString());
-            //docsList[id].isSelected = (bool)check.IsChecked;
         }
     }
 }
