@@ -4,6 +4,20 @@
 [Created with ![heart](http://i.imgur.com/oXJmdtz.gif) in Poland by RapidDev](https://rdev.cc/)<br />
 Print all your PDF files with one click
 
+## What do we get?
+- [x] Mass printing without additional software like Adobe Acrobat
+- [x] Windows 10 folder selection without outdated WinForms
+- [x] Modern interface
+
+## Interface
+Simple intuitive interface modeled created using MaterialDesignInXamlToolkit
+<br/><br/>
+![Main](https://github.com/rapiddev/TotalPrint/blob/master/Assets/screen1.png?raw=true)
+<br/><br/>
+![Selected documents](https://github.com/rapiddev/TotalPrint/blob/master/Assets/screen2.png?raw=true)
+<br/><br/>
+![Select printer](https://github.com/rapiddev/TotalPrint/blob/master/Assets/screen3.png?raw=true)
+
 ### Icons
 The icon of this free application uses a SVG (printer - Google @Google) from MaterialDesignIcons by Google, Maintained by Austin Andrews<br/>[https://github.com/Templarian/MaterialDesign](https://github.com/Templarian/MaterialDesign)
 
