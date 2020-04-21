@@ -26,20 +26,53 @@
             <StackPanel>
                 <TextBlock FontSize="15" Text="Total Print" />
                 <TextBlock FontWeight="Light" Text="Copyright © RapidDev 2020" />
-                <Button
+                <TextBlock
                     Margin="0,30,0,0"
-                    HorizontalAlignment="Stretch"
-                    Click="Button_AddClick"
-                    Style="{StaticResource MaterialDesignOutlinedButton}">
-                    Add application to the context menu
-                </Button>
-                <Button
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Stretch"
-                    Click="Button_RemoveClick"
-                    Style="{StaticResource MaterialDesignOutlinedButton}">
-                    Remove application from the context menu
-                </Button>
+                    Text="You can add the application to the context menu. Thanks to this, when you right-click on the selected folder, the 'Print Folder' option will appear, which will open the Total Print application on the selected folder."
+                    TextWrapping="Wrap" />
+                <StackPanel
+                    x:Name="restartStack"
+                    Margin="0,5,0,0"
+                    Orientation="Horizontal"
+                    Visibility="Hidden">
+                    <TextBlock Text="To change this setting you must enable the application in administrator mode." />
+                    <Button
+                        Margin="10,0,0,0"
+                        Click="Button_RestartClick"
+                        Content="Restart as administrator"
+                        Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Button.Template>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Foreground" Value="#458f48" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Foreground" Value="#3e5431" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <Button
+                        x:Name="addContextButton"
+                        Margin="0,0,10,0"
+                        Click="Button_AddClick"
+                        Style="{StaticResource MaterialDesignOutlinedButton}">
+                        Add to the context menu
+                    </Button>
+                    <Button
+                        x:Name="removeContextButton"
+                        Click="Button_RemoveClick"
+                        Style="{StaticResource MaterialDesignOutlinedButton}">
+                        Remove from the context menu
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
