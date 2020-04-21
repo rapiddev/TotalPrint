@@ -13,6 +13,9 @@
     Background="{DynamicResource MaterialDesignPaper}"
     mc:Ignorable="d">
     <Grid>
-        <Frame x:Name="rootFrame" NavigationUIVisibility="Hidden" />
+        <Frame
+            x:Name="rootFrame"
+            Navigating="rootOnNavigating"
+            NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
