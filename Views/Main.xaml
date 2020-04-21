@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <materialDesign:Card Margin="12" Padding="20">
+        <materialDesign:Card Margin="12,12,12,12" Padding="20">
             <Grid>
                 <StackPanel>
                     <TextBox
@@ -62,22 +62,26 @@
                         materialDesign:HintAssist.IsFloating="True"
                         ItemsSource="{x:Static Printing:PrinterSettings.InstalledPrinters}"
                         SelectedIndex="0" />
-                    <Button
-                        Margin="0,20,0,0"
-                        HorizontalAlignment="Stretch"
-                        Click="Button_PrintClick"
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                        Print
-                    </Button>
-                    <Button
-                        Margin="0,10,0,0"
-                        HorizontalAlignment="Stretch"
-                        Click="Button_SettingsClick"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                        Open settings
-                    </Button>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Stretch"
+                            Click="Button_PrintClick"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}">
+                            Print
+                        </Button>
+                        <Button
+                            Grid.Column="1"
+                            Click="Button_SettingsClick"
+                            Style="{StaticResource MaterialDesignOutlinedButton}">
+                            <materialDesign:PackIcon Kind="CogOutline" />
+                        </Button>
+                    </Grid>
                     <ProgressBar
                         x:Name="progressBar"
                         Margin="0,20,0,0"

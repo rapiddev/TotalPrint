@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,22 @@ namespace Total_Print.Views
         }
         private void Button_AddClick(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                RegistryKey key = Registry.ClassesRoot.CreateSubKey(@"Directory\shell\TotalPrint");
+                key.SetValue("", "Print PDF files in the folder");
+                key.SetValue("Icon", System.Reflection.Assembly.GetExecutingAssembly().Location);
+                key.Close();
+
+                key = Registry.ClassesRoot.CreateSubKey(@"Directory\shell\TotalPrint\command");
+                key.SetValue("", "\"" + System.Reflection.Assembly.GetExecutingAssembly().Location + "\" \"%1\"");
+                key.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         private void Button_RemoveClick(object sender, RoutedEventArgs e)
         {

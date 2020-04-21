@@ -44,17 +44,10 @@ namespace Total_Print.Views
             }
             return false;
         }
-
-        private void Registry()
-        {
-
-        }
-
         public void OnDone()
         {
             progressBar.Visibility = Visibility.Hidden;
         }
-
         private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             string path = PickFolderDialog(textBoxDirectory.Text, "Select folder for printing");
@@ -77,7 +70,6 @@ namespace Total_Print.Views
                     docsList.Add(new DocFile() { id = i, name = System.IO.Path.GetFileName(fileEntries[i]), type = System.IO.Path.GetExtension(fileEntries[i]), path = fileEntries[i], isSelected = true });
             }
         }
-
         private void Button_PrintClick(object sender, RoutedEventArgs e)
         {
             progressBar.Visibility = Visibility.Visible;

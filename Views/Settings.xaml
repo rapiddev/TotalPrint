@@ -45,14 +45,23 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <Button
-                Margin="0,10,0,0"
-                HorizontalAlignment="Stretch"
-                Click="Button_BackClick"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton">
-                Back to dashboard
-            </Button>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Button
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Stretch"
+                    Click="Button_BackClick"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton">
+                    Save settings
+                </Button>
+                <Button
+                    HorizontalAlignment="Stretch"
+                    Click="Button_BackClick"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton">
+                    Back to dashboard
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
