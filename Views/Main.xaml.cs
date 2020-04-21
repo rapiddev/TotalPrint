@@ -6,21 +6,48 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace Total_Print
+namespace Total_Print.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for Main.xaml
+    /// </summary>
+    public partial class Main : Page
     {
         private List<DocFile> docsList = new List<DocFile> { };
         private string printerName;
-        public MainWindow()
+        public Main()
         {
             InitializeComponent();
-            textBoxDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString();
-            if (Directory.Exists(textBoxDirectory.Text))
+
+            if (!this.Arguments())
             {
-                ProcessDirectory(textBoxDirectory.Text);
-                filesList.ItemsSource = docsList;
+                textBoxDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString();
+                if (Directory.Exists(textBoxDirectory.Text))
+                    ProcessDirectory(textBoxDirectory.Text);
             }
+
+            if (docsList.Count > 0)
+                filesList.ItemsSource = docsList;
+        }
+        private bool Arguments()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                if (Directory.Exists(args[1]))
+                {
+                    textBoxDirectory.Text = args[1];
+                    ProcessDirectory(args[1]);
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        private void Registry()
+        {
+
         }
 
         public void OnDone()
@@ -51,7 +78,7 @@ namespace Total_Print
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_PrintClick(object sender, RoutedEventArgs e)
         {
             progressBar.Visibility = Visibility.Visible;
             PrintBuilder printer = new PrintBuilder()
@@ -64,12 +91,17 @@ namespace Total_Print
 
             printer.Done(OnDone);
         }
+        private void Button_SettingsClick(object sender, RoutedEventArgs e)
+        {
+            (App.Current.MainWindow as Views.Navigation).OpenSettings();
+        }
         private void CheckBox_Change(object sender, RoutedEventArgs e)
         {
             CheckBox check = sender as CheckBox;
             int id = Convert.ToInt32(check.Tag.ToString());
-            
-            docsList[id] = new DocFile() {
+
+            docsList[id] = new DocFile()
+            {
                 name = docsList[id].name,
                 path = docsList[id].path,
                 type = docsList[id].type,
