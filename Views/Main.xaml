@@ -74,7 +74,7 @@
                         Margin="0,10,0,0"
                         HorizontalAlignment="Stretch"
                         Click="Button_SettingsClick"
-                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
                         ToolTip="Resource name: MaterialDesignRaisedLightButton">
                         Open settings
                     </Button>

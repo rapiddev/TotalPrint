@@ -24,5 +24,17 @@ namespace Total_Print.Views
         {
             InitializeComponent();
         }
+        private void Button_BackClick(object sender, RoutedEventArgs e)
+        {
+            (App.Current.MainWindow as Views.Navigation).OpenDashboard();
+        }
+        private void Button_AddClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void Button_RemoveClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
