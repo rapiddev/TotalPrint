@@ -42,7 +42,6 @@ namespace Total_Print
         public PrintBuilder SetList(DocFile[] files)
         {
             this._docsList = files;
-            this._taskCount = files.Length;
             return this;
         }
         public void Done(Action action)
@@ -60,21 +59,23 @@ namespace Total_Print
         }
         public async void PrintAsync()
         {
-            this._taskCur = 0;
+            this._taskCur = this._taskCount = 0;
 
             if (this.Ready())
             {
                 foreach (DocFile file in _docsList)
                 {
                     if (File.Exists(file.path) && file.isSelected)
+                    {
+                        _taskCount++;
                         await Task.Run(() => PrintFile(file.path, file.name));
+                    }
                 }
             }
         }
         private void PrintFile(string path, string name = "Unknown PDF")
         {
             Thread.Sleep(100);
-            _taskCur++;
 
             foreach (PaperSize paperSize in this._printer.PaperSizes)
             {
@@ -96,7 +97,8 @@ namespace Total_Print
                 }
             }
 
-            if(_taskCur == _taskCount)
+            _taskCur++;
+            if (_taskCur == _taskCount)
             {
                 if(_funcOnDone != null)
                     App.Current.Dispatcher.Invoke(_funcOnDone);

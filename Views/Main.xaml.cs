@@ -67,19 +67,27 @@ namespace Total_Print.Views
             for (int i = 0; i < fileEntries.Length; i++)
             {
                 if (System.IO.Path.GetExtension(fileEntries[i]) == ".pdf")
-                    docsList.Add(new DocFile() { id = i, name = System.IO.Path.GetFileName(fileEntries[i]), type = System.IO.Path.GetExtension(fileEntries[i]), path = fileEntries[i], isSelected = true });
+                    docsList.Add(new DocFile()
+                    {
+                        id = i,
+                        name = System.IO.Path.GetFileName(fileEntries[i]),
+                        type = System.IO.Path.GetExtension(fileEntries[i]),
+                        path = fileEntries[i],
+                        isSelected = true
+                    });
             }
         }
         private void Button_PrintClick(object sender, RoutedEventArgs e)
         {
-            progressBar.Visibility = Visibility.Visible;
             PrintBuilder printer = new PrintBuilder()
                 .SetList(docsList.ToArray())
                 .SetPrinter(comboboxPrinter.SelectedItem.ToString());
 
-
             if (printer.Ready())
+            {
+                progressBar.Visibility = Visibility.Visible;
                 printer.PrintAsync();
+            }
 
             printer.Done(OnDone);
         }
@@ -92,13 +100,19 @@ namespace Total_Print.Views
             CheckBox check = sender as CheckBox;
             int id = Convert.ToInt32(check.Tag.ToString());
 
-            docsList[id] = new DocFile()
+            for (int i = 0; i < docsList.Count; i++)
             {
-                name = docsList[id].name,
-                path = docsList[id].path,
-                type = docsList[id].type,
-                isSelected = (bool)check.IsChecked
-            };
+                if (docsList[i].id == id)
+                {
+                    docsList[i] = new DocFile()
+                    {
+                        name = docsList[i].name,
+                        path = docsList[i].path,
+                        type = docsList[i].type,
+                        isSelected = (bool)check.IsChecked
+                    };
+                }
+            }
         }
         private string PickFolderDialog(string _def, string _name = "Select directory")
         {
