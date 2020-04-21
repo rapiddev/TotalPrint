@@ -34,6 +34,26 @@ namespace Total_Print.Views
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
+                if(args[1].StartsWith("totalprint:"))
+                {
+                    string dirBuild = args[1].Remove(0, 11);
+                    if(args.Length > 2)
+                    {
+                        for (int i = 2; i < args.Length; i++)
+                        {
+                            dirBuild += " " + args[i];
+                        }
+                    }
+                    
+                    if(Directory.Exists(dirBuild))
+                    {
+                        textBoxDirectory.Text = dirBuild;
+                        ProcessDirectory(dirBuild);
+                        return true;
+                    }
+                    return false;
+                }
+
                 if (Directory.Exists(args[1]))
                 {
                     textBoxDirectory.Text = args[1];

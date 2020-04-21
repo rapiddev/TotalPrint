@@ -53,7 +53,7 @@ namespace Total_Print.Views
                 key.Close();
 
                 key = Registry.ClassesRoot.CreateSubKey(@"Directory\shell\TotalPrint\command");
-                key.SetValue("", "\"" + System.Reflection.Assembly.GetExecutingAssembly().Location + "\" \"%1\"");
+                key.SetValue("", "explorer.exe totalprint:%1");
                 key.Close();
         }
         private void Button_RemoveClick(object sender, RoutedEventArgs e)
