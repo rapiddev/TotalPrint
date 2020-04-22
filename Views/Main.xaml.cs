@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Total_Print.Resources;
 
 namespace Total_Print.Views
 {
@@ -70,7 +71,7 @@ namespace Total_Print.Views
         }
         private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            string path = PickFolderDialog(textBoxDirectory.Text, "Select folder for printing");
+            string path = new Dialog("Select folder for printing", textBoxDirectory.Text).Get();
             textBoxDirectory.Text = path;
 
             if (Directory.Exists(path))
@@ -133,28 +134,6 @@ namespace Total_Print.Views
                     };
                 }
             }
-        }
-        private string PickFolderDialog(string _def, string _name = "Select directory")
-        {
-            string path = "";
-            CommonOpenFileDialog _dialog = new CommonOpenFileDialog()
-            {
-                Title = _name,
-                IsFolderPicker = true,
-                InitialDirectory = _def,
-                DefaultDirectory = _def,
-                AddToMostRecentlyUsedList = false,
-                EnsureFileExists = true,
-                EnsurePathExists = true,
-                EnsureReadOnly = false,
-                EnsureValidNames = true,
-                Multiselect = false,
-                ShowPlacesList = true
-            };
-
-            if (_dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                path = _dialog.FileName;
-            return path;
         }
     }
 }

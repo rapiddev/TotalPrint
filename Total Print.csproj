@@ -119,6 +119,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\Dialog.cs" />
+    <Compile Include="Resources\PrintBuilder.cs" />
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -146,7 +148,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrintBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,10 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Drawing.Printing;
 using System.Threading.Tasks;
 using System.Threading;
-using System;
 
-namespace Total_Print
+namespace Total_Print.Resources
 {
     public struct DocFile
     {
@@ -100,7 +100,7 @@ namespace Total_Print
             _taskCur++;
             if (_taskCur == _taskCount)
             {
-                if(_funcOnDone != null)
+                if (_funcOnDone != null)
                     App.Current.Dispatcher.Invoke(_funcOnDone);
             }
         }

@@ -27,10 +27,7 @@ namespace Total_Print.Views
         {
             InitializeComponent();
 
-            if((new WindowsPrincipal(WindowsIdentity.GetCurrent())).IsInRole(WindowsBuiltInRole.Administrator))
-            {
-            }
-            else
+            if(!(new WindowsPrincipal(WindowsIdentity.GetCurrent())).IsInRole(WindowsBuiltInRole.Administrator))
             {
                 addContextButton.IsEnabled = removeContextButton.IsEnabled = false;
                 restartStack.Visibility = Visibility.Visible;
