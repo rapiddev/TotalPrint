@@ -4,6 +4,10 @@
 [Created with ![heart](http://i.imgur.com/oXJmdtz.gif) in Poland by RapidDev](https://rdev.cc/)<br />
 Print all your PDF files with one click
 
+## Install on your computer
+You can download the latest official version from the Microsoft Store.<br/>
+[Total Print on MS Store](https://www.microsoft.com/en-us/p/total-print/9nsg5xsncfnj?activetab=pivot:overviewtab)
+
 ## What do we get?
 - [x] Mass printing without additional software like Adobe Acrobat
 - [x] Windows 10 folder selection without outdated WinForms
