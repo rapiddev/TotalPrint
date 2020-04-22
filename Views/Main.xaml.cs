@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using Total_Print.Resources;
 
 namespace Total_Print.Views
@@ -15,7 +14,6 @@ namespace Total_Print.Views
     public partial class Main : Page
     {
         private List<DocFile> docsList = new List<DocFile> { };
-        private string printerName;
         public Main()
         {
             InitializeComponent();
@@ -29,6 +27,10 @@ namespace Total_Print.Views
 
             if (docsList.Count > 0)
                 filesList.ItemsSource = docsList;
+        }
+        public void OnDone()
+        {
+            progressBar.Visibility = Visibility.Hidden;
         }
         private bool Arguments()
         {
@@ -65,21 +67,6 @@ namespace Total_Print.Views
             }
             return false;
         }
-        public void OnDone()
-        {
-            progressBar.Visibility = Visibility.Hidden;
-        }
-        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            string path = new Dialog("Select folder for printing", textBoxDirectory.Text).Get();
-            textBoxDirectory.Text = path;
-
-            if (Directory.Exists(path))
-            {
-                ProcessDirectory(path);
-                filesList.ItemsSource = docsList;
-            }
-        }
         private void ProcessDirectory(string targetDirectory)
         {
             docsList = new List<DocFile> { };
@@ -96,6 +83,17 @@ namespace Total_Print.Views
                         path = fileEntries[i],
                         isSelected = true
                     });
+            }
+        }
+        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string path = new Dialog("Select folder for printing", textBoxDirectory.Text).Get();
+            textBoxDirectory.Text = path;
+
+            if (Directory.Exists(path))
+            {
+                ProcessDirectory(path);
+                filesList.ItemsSource = docsList;
             }
         }
         private void Button_PrintClick(object sender, RoutedEventArgs e)
