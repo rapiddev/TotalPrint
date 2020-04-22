@@ -59,15 +59,18 @@ namespace Total_Print.Views
             {
                 if (key != null)
                 {
-                    key.DeleteValue("");
+                    if(key.GetValueNames().Contains(""))
+                        key.DeleteValue("");
                 }
             }
             using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"Directory\shell\TotalPrint", true))
             {
                 if (key != null)
                 {
-                    key.DeleteValue("");
-                    key.DeleteValue("Icon");
+                    if (key.GetValueNames().Contains(""))
+                        key.DeleteValue("");
+                    if (key.GetValueNames().Contains("Icon"))
+                        key.DeleteValue("Icon");
                 }
             }
         }
